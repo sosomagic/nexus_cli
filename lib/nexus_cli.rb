@@ -9,7 +9,7 @@ module NexusCli
   DEFAULT_ACCEPT_HEADER = {
     "Accept" => "application/json"
   }.freeze
-  
+
   DEFAULT_CONTENT_TYPE_HEADER = {
     "Content-Type" => "application/json"
   }.freeze
@@ -27,6 +27,8 @@ module NexusCli
   autoload :ArtifactActions, 'nexus_cli/mixins/artifact_actions'
   autoload :GlobalSettingsActions, 'nexus_cli/mixins/global_settings_actions'
   autoload :UserActions, 'nexus_cli/mixins/user_actions'
+  autoload :RoleActions, 'nexus_cli/mixins/role_actions'
+  autoload :PrivilegeActions, 'nexus_cli/mixins/privilege_actions'
   autoload :RepositoryActions, 'nexus_cli/mixins/repository_actions'
   autoload :LoggingActions, 'nexus_cli/mixins/logging_actions'
   autoload :CustomMetadataActions, 'nexus_cli/mixins/pro/custom_metadata_actions'

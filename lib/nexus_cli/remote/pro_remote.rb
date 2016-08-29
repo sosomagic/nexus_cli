@@ -1,6 +1,6 @@
 module NexusCli
   class ProRemote < BaseRemote
-    
+
     include ArtifactActions
     include CustomMetadataActions
     include GlobalSettingsActions
@@ -8,6 +8,8 @@ module NexusCli
     include RepositoryActions
     include SmartProxyActions
     include UserActions
+    include RoleActions
+    include PrivilegeActions
 
     def get_license_info
       response = nexus.get(nexus_url("service/local/licensing"), :header => DEFAULT_ACCEPT_HEADER)
@@ -46,7 +48,7 @@ module NexusCli
 
     def transfer_artifact(artifact, from_repository, to_repository)
       do_transfer_artifact(artifact, from_repository, to_repository)
-      
+
       configuration["repository"] = sanitize_for_id(from_repository)
       from_artifact_metadata = get_custom_metadata_hash(artifact)
 

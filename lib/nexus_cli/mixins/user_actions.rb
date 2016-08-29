@@ -7,7 +7,7 @@ module NexusCli
 
 
     # Gets information about the current Nexus users.
-    # 
+    #
     # @return [String] a String of XML with data about Nexus users
     def get_users
       response = nexus.get(nexus_url("service/local/users"))
@@ -20,9 +20,9 @@ module NexusCli
     end
 
     # Creates a User.
-    # 
+    #
     # @param  params [Hash] a Hash of parameters to use during user creation
-    # 
+    #
     # @return [Boolean] true if the user is created, false otherwise
     def create_user(params)
       response = nexus.post(nexus_url("service/local/users"), :body => create_user_json(params), :header => DEFAULT_CONTENT_TYPE_HEADER)
@@ -37,9 +37,9 @@ module NexusCli
     end
 
     # Updates a user by changing parts of that user's data.
-    # 
+    #
     # @param  params [Hash] a Hash of parameters to update
-    # 
+    #
     # @return [Boolean] true if the user is updated, false otherwise
     def update_user(params)
       params[:roles] = [] if params[:roles] == [""]
@@ -61,10 +61,10 @@ module NexusCli
       end
     end
 
-    # Gets a user 
+    # Gets a user
     #
     # @param  user [String] the name of the user to get
-    # 
+    #
     # @return [Hash] a parsed Ruby object representing the user's JSON
     def get_user(user)
       response = nexus.get(nexus_url("service/local/users/#{user}"), :header => DEFAULT_ACCEPT_HEADER)
@@ -79,9 +79,9 @@ module NexusCli
     end
 
     # Changes the password of a user
-    # 
+    #
     # @param  params [Hash] a hash given to update the users password
-    # 
+    #
     # @return [type] [description]
     def change_password(params)
       response = nexus.post(nexus_url("service/local/users_changepw"), :body => create_change_password_json(params), :header => DEFAULT_CONTENT_TYPE_HEADER)
@@ -98,7 +98,7 @@ module NexusCli
     # Deletes the Nexus user with the given id.
     #
     # @param  user_id [String] the Nexus user to delete
-    # 
+    #
     # @return [Boolean] true if the user is deleted, false otherwise
     def delete_user(user_id)
       response = nexus.delete(nexus_url("service/local/users/#{user_id}"))
@@ -121,5 +121,6 @@ module NexusCli
     def create_change_password_json(params)
       JSON.dump(:data => params)
     end
+
   end
 end

@@ -150,6 +150,52 @@ The output from the server was:
     status_code(116)
   end
 
+  class PrivilegeNotFoundException < NexusCliError
+    def initialize(id)
+      @id = id
+    end
+
+    def message
+      "A privilege with the ID of #{@id} could not be found. Please ensure it exists."
+    end
+    status_code(118)
+  end
+
+  class CreatePrivilegeException < NexusCliError
+    def initialize(body)
+      @server_response = JSON.pretty_generate(JSON.parse(body))
+    end
+
+    def message
+      %{Your create privilege command failed due to the following:
+#{@server_response}}
+    end
+    status_code(117)
+  end
+
+  class RoleNotFoundException < NexusCliError
+    def initialize(id)
+      @id = id
+    end
+
+    def message
+      "A role with the ID of #{@id} could not be found. Please ensure it exists."
+    end
+    status_code(118)
+  end
+
+  class CreateRoleException < NexusCliError
+    def initialize(body)
+      @server_response = JSON.pretty_generate(JSON.parse(body))
+    end
+
+    def message
+      %{Your create role command failed due to the following:
+#{@server_response}}
+    end
+    status_code(117)
+  end
+
   class CreateUserException < NexusCliError
     def initialize(body)
       @server_response = JSON.pretty_generate(JSON.parse(body))
@@ -244,7 +290,7 @@ The output from the server was:
     end
     status_code(127)
   end
-  
+
   class NexusHTTP404 < NexusCliError
     def initialize(body)
       @server_response = body
